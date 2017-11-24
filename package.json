@@ -1,0 +1,15 @@
+{
+  "name": "fcc-pinterest-clone",
+  "version": "1.0.0",
+  "description": "A pinterest clone for the freeCodeCamp project",
+  "main": "index.js",
+  "repository": "https://github.com/abialbon/fcc-pinterest-clone.git",
+  "author": "Abialbon Paul <dr.abialbon@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
