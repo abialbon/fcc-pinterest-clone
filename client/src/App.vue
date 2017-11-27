@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <h1>FCC-Pinterest-Clone</h1>
-  </div>
+   <div>
+     <router-view></router-view>
+   </div>
 </template>
 
 <script>
+  export default {
 
+  }
 </script>
 
 <style>
