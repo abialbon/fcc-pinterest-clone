@@ -1,5 +1,14 @@
 <template>
   <div>
-    <p>This is all user pins page</p>
+    <app-header></app-header>
   </div>
 </template>
+
+<script>
+  import Header from '../containers/header.vue';
+  export default {
+    components: {
+      'app-header' : Header
+    }
+  }
+</script>
