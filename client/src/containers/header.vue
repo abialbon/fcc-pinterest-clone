@@ -1,8 +1,9 @@
 <template>
-  <header class="navbar bg-primary">
+  <header class="navbar">
     <div class="navbar-section">
-      <router-link active-class="disabled" to="/pins" class="btn btn-link ">All Pins</router-link>
-      <router-link active-class="disabled" to="/mypins" class="btn btn-link">My Pins</router-link>
+      <router-link active-class="active" to="/pins" class="btn btn-link ">All Pins</router-link>
+      <router-link active-class="active" to="/mypins" class="btn btn-link" exact>My Pins</router-link>
+      <router-link active-class="active" to="/mypins/add" class="btn btn-link">Add A Pin</router-link>
     </div>
     <div class="navbar-center">
       <router-link to="/" class="navbar-brand">Window Surf</router-link>
@@ -41,6 +42,5 @@
   }
   a.btn.btn-link, .navbar-brand {
     font-size: 1.125em;
-    color: white !important;
   }
 </style>

@@ -10,6 +10,10 @@
   }
 </script>
 
-<style>
-
+<style lang="scss">
+  .active {
+    background-color: #ffe135 !important;
+    color: white !important;
+    font-weight: bold !important;
+  }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div>
     <app-header></app-header>
-    <section class="bg-dark">
-      <h1>All Pins</h1>
+    <section>
+      <h1>#All Pins</h1>
     </section>
   </div>
 </template>
@@ -15,3 +15,10 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  section {
+    background-color: #f1f7ed;
+    height: 400px;
+  }
+</style>
