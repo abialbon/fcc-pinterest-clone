@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const pinSchema = mongoose.Schema({
     imgUrl: String,
-    pageUrl: String,
+    siteUrl: String,
+    author: mongoose.Schema.Types.ObjectId,
     likes: [mongoose.Schema.Types.ObjectId]
 });
 
