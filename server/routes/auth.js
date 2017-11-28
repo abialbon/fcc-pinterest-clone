@@ -36,7 +36,6 @@ router.get('/twitter/callback', (req, res) => {
 });
 
 router.post('/twitter/callback', (req, res) => {
-    console.log(req.body);
     request.post({
         url: `https://api.twitter.com/oauth/access_token?oauth_verifier`,
         oauth: {
@@ -47,12 +46,7 @@ router.post('/twitter/callback', (req, res) => {
         form: { oauth_verifier: req.body.oauth_verifier }
     }, function (err, r, body) {
         const JSONFormatedStr = '{"' + body.split('=').join('":"').split('&').join('","') + '"}';
-        // 🔥 TODO: Complete using the twitter ID of the user to create / get user from database.
-        // const twitterData = JSON.parse(parsedStr);
-        // res.send(twitterData);
-        // res.send(body);
         const data = JSON.parse(JSONFormatedStr);
-        console.log(data);
         let userID = data.user_id;
         User.findOne({ twitterId: userID })
             .then(user => {
@@ -64,13 +58,19 @@ router.post('/twitter/callback', (req, res) => {
                     })
                     newuser.save()
                         .then(user => {
-                            res.send({ authenticated: true,
-                            token: createToken(user._id) })
+                            res.send({ 
+                                authenticated: true,
+                                token: createToken(user._id),
+                                displayName: user.displayName 
+                            })
                         })
                         .catch(e => console.log(e.message))
                 } else {
-                    res.send({ authenticated: true,
-                        token: createToken(user._id) })
+                    res.send({ 
+                        authenticated: true,
+                        token: createToken(user._id),
+                        displayName: user.displayName 
+                    })
                 }
             })
             .catch(e => console.log(e.message))

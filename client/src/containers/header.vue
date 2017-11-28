@@ -8,7 +8,7 @@
       <router-link to="/" class="navbar-brand">Window Surf</router-link>
     </div>
     <div class="navbar-section">
-      <a href="#" class="btn btn-link" v-if="!isAuthenticated">Login</a>
+      <a class="btn btn-link" v-if="!isAuthenticated" @click="goToTwitterLink" >Login</a>
       <a href="#" class="btn btn-link" v-if="isAuthenticated">Logout</a>
     </div>
   </header>
@@ -17,6 +17,18 @@
 <script>
   import { mapGetters } from 'vuex';
   export default {
+    methods: {
+      goToTwitterLink() {
+        // Get the request token from the server and form the link to take the user for twitter authorization
+        let twitterUrl;
+        this.$http.post('http://localhost:3100/auth/twitter/')
+          .then(data => data.json())
+          .then(result => {
+            twitterUrl = `https://api.twitter.com/oauth/authorize?oauth_token=${result.oauth_token}&oauth_token_secret=${result.oauth_token_secret}&oauth_callback_confirmed=${result.oauth_callback_confirmed}`
+            window.location = twitterUrl;
+          });
+      }
+    },
     computed: mapGetters({
       isAuthenticated: 'isAuthenticated'
     })
