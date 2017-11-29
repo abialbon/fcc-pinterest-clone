@@ -33,7 +33,7 @@ router.post('/twitter', (req, res) => {
 router.get('/twitter/callback', (req, res) => {
     let q = req.query;
     // TODO: Change the URL
-    let authAppUrl = `https://window-surf.herokuapp.com?oauth_token=${q.oauth_token}&oauth_verifier=${q.oauth_verifier}`;
+    let authAppUrl = `https://window-surf.herokuapp.com/authenticate?oauth_token=${q.oauth_token}&oauth_verifier=${q.oauth_verifier}`;
     res.redirect(authAppUrl);
 });
 
