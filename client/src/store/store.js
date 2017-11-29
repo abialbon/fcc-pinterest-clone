@@ -38,6 +38,30 @@ export const store = new Vuex.Store({
       state.myPins = [...newMyPins];
       let newAllPins = state.allPins.filter(x => x._id !== payload);
       state.allPins = [...newAllPins];
+    },
+    like: (state, payload) => {
+      state.myPins.forEach(x => {
+        if (x._id === payload) {
+          x.numLikes++;
+        }
+      });
+      state.allPins.forEach(x => {
+        if (x._id === payload) {
+          x.numLikes++;
+        }
+      })
+    },
+    unlike: (state, payload) => {
+      state.myPins.forEach(x => {
+        if (x._id === payload) {
+          x.numLikes--;
+        }
+      });
+      state.allPins.forEach(x => {
+        if (x._id === payload) {
+          x.numLikes--;
+        }
+      })
     }
   },
   actions: {
@@ -79,7 +103,7 @@ export const store = new Vuex.Store({
           }
         });
     },
-    deleteMyPin: ( context, payload ) => {
+    deleteMyPin: (context, payload) => {
       Vue.http.delete('http://localhost:3100/api/pin/' + payload,
         { headers: { 'authorization': `Bearer ${context.state.token}` } })
         .then(response => response.json())
@@ -87,6 +111,18 @@ export const store = new Vuex.Store({
           if(res.success) {
             context.commit('deleteMyPin', payload);
           }
+        })
+    },
+    likeAPin: (context, payload) => {
+      Vue.http.put('http://localhost:3100/api/pin/' + payload,
+        { headers: { 'authorization': `Bearer ${context.state.token}` } })
+        .then(response => response.json())
+        .then(res => {
+            if(res.liked) {
+              context.commit('like', payload);
+              return;
+            }
+            context.commit('unlike', payload);
         })
     }
   }

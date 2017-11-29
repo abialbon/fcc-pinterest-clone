@@ -11,6 +11,7 @@
                 :siteUrl="pin.siteUrl"
                 :numLikes="pin.numLikes"
                 :context="'all'"
+                :id="pin._id"
       ></app-card>
     </div>
   </div>

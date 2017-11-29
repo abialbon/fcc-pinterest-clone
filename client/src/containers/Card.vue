@@ -7,7 +7,7 @@
       <div class="card-footer">
         <a :href="siteUrl" target="_blank" class="btn btn-primary">Visit Site</a>
         <button class="btn btn-success" v-if="context=='user'" @click="deletePin(id)">Delete</button>
-        <button class="btn badge" :data-badge="numLikes">Like &nbsp;</button>
+        <button class="btn badge" :data-badge="numLikes" @click="like(id)">Like &nbsp;</button>
       </div>
     </div>
   </div>
@@ -20,7 +20,8 @@
     props: ['imgUrl', 'siteUrl', 'numLikes', 'context', 'id'],
     methods: {
       ...mapActions({
-        deletePin : 'deleteMyPin'
+        deletePin : 'deleteMyPin',
+        like: 'likeAPin'
       }),
     },
     mounted() {
