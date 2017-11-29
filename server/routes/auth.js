@@ -16,7 +16,8 @@ router.post('/twitter', (req, res) => {
     request.post({
         url: 'https://api.twitter.com/oauth/request_token',
         oauth: {
-            oauth_callback: 'http://localhost:3100/',
+            // TODO: Change the URL
+            oauth_callback: 'https://window-surf.herokuapp.com/',
             consumer_key: process.env.TWITTER_KEY.trim(),
             consumer_secret: process.env.TWITTER_SECRET.trim()
         },
@@ -31,7 +32,8 @@ router.post('/twitter', (req, res) => {
 
 router.get('/twitter/callback', (req, res) => {
     let q = req.query;
-    let authAppUrl = `http://localhost:8080/authenticate?oauth_token=${q.oauth_token}&oauth_verifier=${q.oauth_verifier}`;
+    // TODO: Change the URL
+    let authAppUrl = `https://window-surf.herokuapp.com?oauth_token=${q.oauth_token}&oauth_verifier=${q.oauth_verifier}`;
     res.redirect(authAppUrl);
 });
 

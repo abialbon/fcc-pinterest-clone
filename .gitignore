@@ -2,7 +2,6 @@
 client/.DS_Store
 node_modules/
 client/node_modules/
-dist/
 npm-debug.log
 yarn-error.log
 *.xml

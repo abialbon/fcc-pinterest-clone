@@ -1,5 +1,6 @@
 const   express     = require('express'),
         app         = express(),
+        path        = require('path'),
         jwt         = require('jsonwebtoken'),
         db          = require('./server/models/db'),
         cors        = require('cors'),
@@ -11,6 +12,9 @@ const   express     = require('express'),
 db.connect(process.env.DB_URL);
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use(express.static(path.join(__dirname, 'server/static')));
+app.use(express.static(path.join(__dirname, 'client/dist')));
 
 // Middleware that sets req.userID to the user's ID if authorization token is present and valid
 app.use((req, res, next) => {
@@ -25,12 +29,11 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/', (req, res) => {
-   res.send('The pinterest clone is coming up soon!');
-});
-
 app.use('/auth', authRoutes);
 app.use('/api', pinRoutes);
+app.get('/*', (req, res) => {
+   res.sendFile(path.join(__dirname,'/server/static/index.html'));
+});
 
 // 🌎 Listen to PORT
 app.listen(process.env.PORT || 3000, () => {

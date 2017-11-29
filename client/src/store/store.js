@@ -3,6 +3,9 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+// TODO: Set this to the API server's URL
+const baseURL = 'https://window-surf.herokuapp.com';
+
 export const store = new Vuex.Store({
   state: {
     authenticated: false,
@@ -17,11 +20,6 @@ export const store = new Vuex.Store({
     allPins: state => state.allPins
   },
   mutations: {
-    /*
-    Payload: { token: '', displayName: '' }
-    If the token is present, it will authenticate the app
-    Else unauthenticate
-    */
     authenticate: (state, payload) => {
       state.authenticated = !!payload.token;
       state.token = payload.token;
@@ -75,14 +73,14 @@ export const store = new Vuex.Store({
       }
     },
     getMyPins(context) {
-      Vue.http.get('http://localhost:3100/api/mypins', { headers: { 'authorization': `Bearer ${context.state.token}` } })
+      Vue.http.get( baseURL + '/api/mypins', { headers: { 'authorization': `Bearer ${context.state.token}` } })
         .then(response => response.json())
         .then(res => {
           context.commit('addToMyPins', res.data);
         })
     },
     getAllPins(context) {
-      Vue.http.get('http://localhost:3100/api/pins')
+      Vue.http.get( baseURL + '/api/pins')
         .then(response => response.json())
         .then(res => {
           context.commit('addToAllPins', res.data);
@@ -93,7 +91,7 @@ export const store = new Vuex.Store({
       commit('authenticate', payload);
     },
     addToMyPins: (context, payload) => {
-      Vue.http.post('http://localhost:3100/api/pin', payload,
+      Vue.http.post( baseURL + '/api/pin', payload,
         { headers: { 'authorization': `Bearer ${context.state.token}` } })
         .then(data => { return data.json() })
         .then((res) => {
@@ -104,7 +102,7 @@ export const store = new Vuex.Store({
         });
     },
     deleteMyPin: (context, payload) => {
-      Vue.http.delete('http://localhost:3100/api/pin/' + payload,
+      Vue.http.delete(baseURL + '/api/pin/' + payload,
         { headers: { 'authorization': `Bearer ${context.state.token}` } })
         .then(response => response.json())
         .then(res => {
@@ -114,7 +112,7 @@ export const store = new Vuex.Store({
         })
     },
     likeAPin: (context, payload) => {
-      Vue.http.put('http://localhost:3100/api/pin/' + payload,
+      Vue.http.put( baseURL + '/api/pin/' + payload,
         { headers: { 'authorization': `Bearer ${context.state.token}` } })
         .then(response => response.json())
         .then(res => {

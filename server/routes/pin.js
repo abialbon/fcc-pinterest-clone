@@ -7,6 +7,7 @@ const User = require('../models/user');
 // Get all the pins
 router.get('/pins', (req, res) => {
     Pin.find({}, { imgUrl: 1, siteUrl: 1, numLikes: 1 })
+        .limit(50)
         .then(pins => {
             res.send({ success: true, data: pins });
         })
@@ -17,6 +18,7 @@ router.get('/pins', (req, res) => {
 router.get('/mypins', (req, res) => {
    if (req.userID) {
         User.findById(req.userID)
+            .limit(50)
             .populate({
                 path: 'pins',
                 model: 'pin',

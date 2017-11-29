@@ -2,7 +2,16 @@
   <div>
     <app-header></app-header>
     <section>
-      <h1>#All Pins</h1>
+      <div class="container">
+        <div class="columns">
+          <div class="col-4">
+            <img src="/assets/mountain.svg" alt="">
+          </div>
+          <div class="col-8">
+            <h1># Recent Pins</h1>
+          </div>
+        </div>
+      </div>
     </section>
     <div class="pin-grid">
       <app-card v-for="pin in allPins"
@@ -31,10 +40,3 @@
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  section {
-    background-color: #f1f7ed;
-    height: 400px;
-  }
-</style>

@@ -9,10 +9,10 @@
       </div>
     </div>
     <div class="video-container">
-      <video loop muted autoplay poster="dist/assets/Cloud_Surf.jpg" class="background-video">
-        <source src="dist/assets/Cloud_Surf.webm" type="video/webm">
-        <source src="dist/assets/Cloud_Surf.mp4" type="video/mp4">
-        <source src="dist/assets/Cloud_Surf.ogv" type="video/ogv">
+      <video loop muted autoplay poster="/assets/Cloud_Surf.jpg" class="background-video">
+        <source src="/assets/Cloud_Surf.webm" type="video/webm">
+        <source src="/assets/Cloud_Surf.mp4" type="video/mp4">
+        <source src="/assets/Cloud_Surf.ogv" type="video/ogv">
       </video>
     </div>
   </div>
