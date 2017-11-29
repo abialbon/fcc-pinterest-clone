@@ -16,12 +16,14 @@
         // TODO: Error handling cases for authentication failure
         if (data.authenticated) {
           store.dispatch('authenticate', { token: data.token, displayName: data.displayName });
+          localStorage.setItem('app_name', data.displayName);
+          localStorage.setItem('app_token', data.token);
           next('/pins');
         } else {
           next('/')
         }
       })
-      .catch(e => next())  
+      .catch(e => next())
     }
   }
 </script>

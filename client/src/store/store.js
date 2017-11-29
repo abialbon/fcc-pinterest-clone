@@ -15,7 +15,7 @@ export const store = new Vuex.Store({
   },
   mutations: {
     authenticate: (state, payload) => {
-      state.authenticated = true;
+      state.authenticated = !!payload.token;
       state.token = payload.token;
       state.displayName = payload.displayName;
     },
@@ -24,6 +24,15 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
+    // Method to check if the user has the token on load
+    initialAuthenticate({ commit }) {
+      let token = localStorage.getItem('app_token');
+      let displayName = localStorage.getItem('app_name');
+      if (token) {
+        commit('authenticate', { token, displayName});
+      }
+    },
+    // General action to authenticate after the auth response
     authenticate: ({ commit }, payload) => {
       commit('authenticate', payload);
     },

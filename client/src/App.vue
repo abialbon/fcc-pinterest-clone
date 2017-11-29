@@ -5,8 +5,14 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex';
   export default {
-
+    methods: mapActions({
+      initialAuthenticate: 'initialAuthenticate'
+    }),
+    created() {
+      this.initialAuthenticate();
+    }
   }
 </script>
 

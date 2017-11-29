@@ -6,10 +6,29 @@ const User = require('../models/user');
 
 // Get all the pins
 router.get('/pins', (req, res) => {
-    Pin.find({})
+    Pin.find({}, { imgUrl: 1, siteUrl: 1, numLikes: 1 })
         .then(pins => {
-            res.send(pins);
+            res.send({ success: true, data: pins });
         })
+        .catch(e => res.send({ success: false, data: e.message }))
+});
+
+// Get all the user pins
+router.get('/mypins', (req, res) => {
+   if (req.userID) {
+        User.findById(req.userID)
+            .populate({
+                path: 'pins',
+                model: 'pin',
+                select: { imgUrl: 1, siteUrl: 1, numLikes: 1 }
+            })
+            .then(user => {
+                res.send({ success: true, data: user.pins })
+            })
+            .catch(e => res.send({ success: false, data: e.message }))
+   } else {
+       res.send({ success: false, data: 'You are not allowed to access this resource' })
+   }
 });
 
 // 📌 Post a pin on the user's board
@@ -52,13 +71,15 @@ router.put('/pin/:id', (req, res) => {
         .then(pin => {
             if (pin.likes.indexOf(req.userID) === -1) {
                 Pin.findByIdAndUpdate(req.params.id, {
-                    $push: { likes: req.userID }
-                })
+                    $push: { likes: req.userID },
+                    $inc: { numLikes: 1 }
+                }, { upsert: true, multi: true })
                     .then(() => res.send({ liked: true, unliked: false }))
             } else {
                 Pin.findByIdAndUpdate(req.params.id, {
-                    $pull: { likes: req.userID }
-                })
+                    $pull: { likes: req.userID },
+                    $inc: { numLikes: -1 }
+                },{ upsert: true, multi: true })
                 .then(() => res.send({ liked: false, unliked: true }))
             }
         })
