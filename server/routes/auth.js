@@ -31,7 +31,7 @@ router.post('/twitter', (req, res) => {
 
 router.get('/twitter/callback', (req, res) => {
     let q = req.query;
-    let authAppUrl = `http://localhost:8080/authenticate?oauth_token=${q.oauth_token}&oauth_verifier=${q.oauth_verifier}`
+    let authAppUrl = `http://localhost:8080/authenticate?oauth_token=${q.oauth_token}&oauth_verifier=${q.oauth_verifier}`;
     res.redirect(authAppUrl);
 });
 
