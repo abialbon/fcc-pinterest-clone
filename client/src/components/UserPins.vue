@@ -1,9 +1,14 @@
 <template>
   <div>
     <app-header></app-header>
-    <div class="container">
+    <div class="pin-grid">
       <app-card v-for="pin in myPins"
-        key="pin._id" :imgUrl="pin.imgUrl" :siteUrl="pin.siteUrl" :numLikes="pin.numLikes"
+          :key="pin._id"
+          :imgUrl="pin.imgUrl"
+          :siteUrl="pin.siteUrl"
+          :numLikes="pin.numLikes"
+          :context="'user'"
+          :id="pin._id"
       ></app-card>
     </div>
   </div>
@@ -23,3 +28,10 @@
     }
   }
 </script>
+
+<style>
+  .pin-grid {
+    width: 95%;
+    margin: auto;
+  }
+</style>

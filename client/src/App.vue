@@ -1,6 +1,6 @@
 <template>
    <div>
-     <router-view></router-view>
+       <router-view></router-view>
    </div>
 </template>
 
@@ -8,10 +8,12 @@
   import { mapActions } from 'vuex';
   export default {
     methods: mapActions({
-      initialAuthenticate: 'initialAuthenticate'
+      initialAuthenticate: 'initialAuthenticate',
+      getAllPins: 'getAllPins'
     }),
     created() {
       this.initialAuthenticate();
+      this.getAllPins();
     }
   }
 </script>

@@ -18,6 +18,7 @@
           store.dispatch('authenticate', { token: data.token, displayName: data.displayName });
           localStorage.setItem('app_name', data.displayName);
           localStorage.setItem('app_token', data.token);
+          store.dispatch('getMyPins');
           next('/pins');
         } else {
           next('/')
