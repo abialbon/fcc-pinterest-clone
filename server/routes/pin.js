@@ -40,7 +40,7 @@ router.post('/pin', (req, res) => {
                 User.findByIdAndUpdate(req.userID, {
                     $push: { pins: pin._id }
                 })
-                    .then(() => res.send({ success: true, pin: pin }))
+                    .then(() => res.send({ success: true, pin: { _id: pin._id, imgUrl: pin.imgUrl, siteUrl: pin.siteUrl, numLikes: pin.numLikes } }))
             })
     } else {
         res.send({ success: false })

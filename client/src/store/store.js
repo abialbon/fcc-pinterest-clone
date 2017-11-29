@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
     myPins: []
   },
   getters: {
-    isAuthenticated: state => state.authenticated
+    isAuthenticated: state => state.authenticated,
+    myPins: state => state.myPins
   },
   mutations: {
     authenticate: (state, payload) => {

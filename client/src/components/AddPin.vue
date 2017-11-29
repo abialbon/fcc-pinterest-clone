@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import Header from '../containers/header';
+import Header from '../containers/Header';
 import { mapActions } from 'vuex';
 export default {
   data: function() {
